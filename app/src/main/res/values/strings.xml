@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">VDiary</string>
+    <string name="lblUsername">Username</string>
+    <string name="txtUsername">Username</string>
+    <string name="lblPassword">Password</string>
+    <string name="txtPassword">Password</string>
+    <string name="btnLogin">Login</string>
 </resources>

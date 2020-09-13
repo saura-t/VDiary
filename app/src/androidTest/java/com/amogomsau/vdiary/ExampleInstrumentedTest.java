@@ -1,4 +1,4 @@
-package com.example.vdiary;
+package com.amogomsau.vdiary;
 
 import android.content.Context;
 

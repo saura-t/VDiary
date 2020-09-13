@@ -1,4 +1,4 @@
-package com.example.vdiary;
+package com.amogomsau.vdiary;
 
 import org.junit.Test;
 

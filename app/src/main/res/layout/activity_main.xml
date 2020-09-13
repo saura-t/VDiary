@@ -14,34 +14,41 @@
     android:paddingHorizontal="10dp"
     android:layout_margin="20dp">
 
-    <TextView
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtusername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lblUsername">
-    </TextView>
-    <EditText
+        android:layout_marginVertical="10dp"
+        android:hint="@string/lblUsername">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:inputType="textEmailAddress"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtpassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/txtUsername"
-        android:inputType="textEmailAddress"
-        android:importantForAutofill="no">
-    </EditText>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lblPassword">
-    </TextView>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/txtPassword"
-        android:inputType="textPassword"
-        android:importantForAutofill="no">
-    </EditText>
+        android:layout_marginVertical="10dp"
+        android:hint="@string/lblPassword">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:inputType="textPassword"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btnLogin">
+        android:layout_marginVertical="10dp"
+        android:text="@string/btnLogin"
+        android:background="@drawable/input"
+        >
     </Button>
 </LinearLayout>
 

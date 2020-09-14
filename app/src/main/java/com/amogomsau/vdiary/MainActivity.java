@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -77,7 +78,8 @@ public class MainActivity extends AppCompatActivity{
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            //Intent intent = new Intent(MainActivity.this, SecondActivity.this);
+            Intent intent = new Intent(MainActivity.this, home.class);
+            startActivity(intent);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -96,8 +98,10 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void updateUI(GoogleSignInAccount account) {
+        //Toast.makeText(MainActivity.this, "You were signed in!", Toast.LENGTH_LONG).show();
+        // Signed in successfully, show authenticated UI.
+        //Intent intent = new Intent(MainActivity.this, home.class);
+        //startActivity(intent);
     }
-
-
 
 }

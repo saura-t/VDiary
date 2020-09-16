@@ -94,14 +94,16 @@ public class MainActivity extends AppCompatActivity{
         // the GoogleSignInAccount will be non-null.
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        updateUI(account);
+        if(account != null) {
+            updateUI(account);
+        }
     }
 
     private void updateUI(GoogleSignInAccount account) {
-        //Toast.makeText(MainActivity.this, "You were signed in!", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "You were signed in!", Toast.LENGTH_LONG).show();
         // Signed in successfully, show authenticated UI.
-        //Intent intent = new Intent(MainActivity.this, home.class);
-        //startActivity(intent);
+        Intent intent = new Intent(MainActivity.this, home.class);
+        startActivity(intent);
     }
 
 }

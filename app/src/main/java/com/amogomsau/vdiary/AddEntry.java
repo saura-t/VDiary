@@ -1,16 +1,10 @@
 package com.amogomsau.vdiary;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
@@ -21,12 +15,19 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.util.List;
@@ -35,7 +36,7 @@ import java.util.Locale;
 public class AddEntry extends AppCompatActivity {
 
     private EditText title, description;
-    private Button add;
+    private FloatingActionButton add, back;
     private ImageView imageButton;
     private TextView location;
     private LocationManager locationManager;
@@ -100,6 +101,7 @@ public class AddEntry extends AppCompatActivity {
         title = findViewById(R.id.title);
         description = findViewById(R.id.description);
         add = findViewById(R.id.btnAddEntry);
+        back = findViewById(R.id.btnBack);
         imageButton = findViewById(R.id.imageButton);
         location = findViewById(R.id.location);
 
@@ -172,6 +174,14 @@ public class AddEntry extends AppCompatActivity {
             public void onClick(View view) {
                 DatabaseHelper mango = new DatabaseHelper(AddEntry.this);
                 mango.addEntry(2, title.getText().toString().trim(), description.getText().toString().trim(), title.getText().toString().trim(), title.getText().toString().trim(), title.getText().toString().trim());
+                finish();
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

@@ -18,47 +18,10 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
-    SignInButton signIn;
-    int RC_SIGN_IN = 0;
-
-    GoogleSignInClient mGoogleSignInClient;
-
-    Button btnnewpage;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        signIn = findViewById(R.id.sign_in_button);
-        signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.sign_in_button:
-                        signIn();
-                        break;
-                }
-            }
-        });
-
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-    }
-
-
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
+    private GoogleSignInClient mGoogleSignInClient;
+    private int RC_SIGN_IN = 0;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -73,10 +36,52 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    @Override
+    protected void onStart() {
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+        super.onStart();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            updateUI(account);
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        SignInButton btnSignIn = findViewById(R.id.btnSignIn);
+
+        // When we click the button
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == R.id.btnSignIn) {
+                    signIn();
+                }
+            }
+        });
+
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-
+            completedTask.getResult(ApiException.class);
             // Signed in successfully, show authenticated UI.
             Intent intent = new Intent(MainActivity.this, home.class);
             startActivity(intent);
@@ -88,22 +93,10 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    @Override
-    protected void onStart() {
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        super.onStart();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account != null) {
-            updateUI(account);
-        }
-    }
-
     private void updateUI(GoogleSignInAccount account) {
         Toast.makeText(MainActivity.this, "You were signed in!", Toast.LENGTH_LONG).show();
         // Signed in successfully, show authenticated UI.
         Intent intent = new Intent(MainActivity.this, home.class);
         startActivity(intent);
     }
-
 }

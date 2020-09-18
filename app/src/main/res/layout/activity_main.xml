@@ -18,7 +18,7 @@
         tools:layout_editor_absoluteY="20dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/welcomeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -27,24 +27,26 @@
             android:gravity="center"
             android:text="Welcome to"
             android:textColor="#000000"
-            android:textSize="36sp" />
+            android:textSize="36sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/vdiaryText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="125dp"
             android:fontFamily="sans-serif-condensed-light"
             android:gravity="center"
-            android:layout_marginBottom="125dp"
             android:text="VDiary"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#000000"
-            android:textSize="36sp" />
+            android:textSize="36sp"
+            tools:ignore="HardcodedText" />
 
         <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
+            android:id="@+id/btnSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

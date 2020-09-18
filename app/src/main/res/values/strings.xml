@@ -5,4 +5,8 @@
     <string name="lblPassword">Password</string>
     <string name="txtPassword">Password</string>
     <string name="btnLogin">Login</string>
+    <string name="lblEmail">Email</string>
+    <string name="lblGoogleId">ID</string>
+    <string name="edtTitle">Title</string>
+    <string name="edtDescription">Description</string>
 </resources>

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
-            updateUI(account);
+            updateUI();
         }
     }
 
@@ -89,11 +88,11 @@ public class MainActivity extends AppCompatActivity {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w("Error", "signInResult:failed code=" + e.getStatusCode());
-            updateUI(null);
+            updateUI();
         }
     }
 
-    private void updateUI(GoogleSignInAccount account) {
+    private void updateUI() {
         Toast.makeText(MainActivity.this, "You were signed in!", Toast.LENGTH_LONG).show();
         // Signed in successfully, show authenticated UI.
         Intent intent = new Intent(MainActivity.this, home.class);

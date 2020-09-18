@@ -23,46 +23,46 @@
             <com.google.android.material.circularreveal.CircularRevealRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:id="@+id/usernameText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/lblUsername"
-                    android:textSize="35sp"
-                    android:textColor="@color/black">
-                </TextView>
+                    android:textColor="@color/black"
+                    android:textSize="35sp"/>
+
                 <TextView
                     android:id="@+id/emailText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/usernameText"
                     android:hint="@string/lblEmail"
-                    android:textSize="15sp"
-                    android:textColor="@color/black">
-                </TextView>
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
                 <TextView
                     android:id="@+id/googleIdText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/emailText"
                     android:hint="@string/lblGoogleId"
-                    android:textColor="@color/black">
-                </TextView>
+                    android:textColor="@color/black"/>
+
                 <androidx.cardview.widget.CardView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
                     app:cardCornerRadius="50dp">
+
                     <ImageView
                         android:id="@+id/avatarImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:srcCompat="@tools:sample/avatars"
                         android:contentDescription="Users Photo"
-                        tools:ignore="HardcodedText">
-                    </ImageView>
+                        tools:srcCompat="@tools:sample/avatars"/>
                 </androidx.cardview.widget.CardView>
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
@@ -70,9 +70,8 @@
                 android:id="@+id/btnSignOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign Out"
                 android:layout_gravity="right|bottom"
-                tools:ignore="HardcodedText,RtlHardcoded" />
+                android:text="Sign Out" />
 
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
@@ -93,33 +92,31 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="6dp"
+                android:layout_columnWeight="1"
                 android:layout_margin="10dp"
-                tools:ignore="UnusedAttribute">
+                app:cardCornerRadius="15dp"
+                app:cardElevation="6dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="15dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Title"
-                        android:textSize="35sp"
                         android:textAppearance="?attr/textAppearanceHeadline6"
-                        tools:ignore="HardcodedText">
-                    </TextView>
+                        android:textSize="35sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Description"
-                        android:textSize="20sp"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        tools:ignore="HardcodedText">
-                    </TextView>
+                        android:textSize="20sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -137,10 +134,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="32dp"
-            android:src="@drawable/ic_plus_24"
             android:backgroundTint="@color/colorPrimary"
-            tools:ignore="UnusedAttribute">
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+            android:src="@drawable/ic_plus_24" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

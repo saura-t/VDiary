@@ -27,8 +27,7 @@
             android:gravity="center"
             android:text="Welcome to"
             android:textColor="#000000"
-            android:textSize="36sp"
-            tools:ignore="HardcodedText" />
+            android:textSize="36sp" />
 
         <TextView
             android:id="@+id/vdiaryText"
@@ -42,8 +41,7 @@
             android:text="VDiary"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#000000"
-            android:textSize="36sp"
-            tools:ignore="HardcodedText" />
+            android:textSize="36sp" />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/btnSignIn"

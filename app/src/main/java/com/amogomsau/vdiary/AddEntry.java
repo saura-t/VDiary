@@ -25,11 +25,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
@@ -43,7 +40,6 @@ import java.util.Locale;
 public class AddEntry extends AppCompatActivity {
 
     private EditText title, description;
-    private FloatingActionButton add, back;
     private ImageView imageButton;
     private TextView location;
     private LocationManager locationManager;
@@ -67,6 +63,7 @@ public class AddEntry extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
+            assert extras != null;
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             imageButton.setImageBitmap(imageBitmap);
         } else if (requestCode == Gallery_request_code && resultCode == RESULT_OK && data != null) {
@@ -109,8 +106,8 @@ public class AddEntry extends AppCompatActivity {
 
         title = findViewById(R.id.title);
         description = findViewById(R.id.description);
-        add = findViewById(R.id.btnAddEntry);
-        back = findViewById(R.id.btnBack);
+        FloatingActionButton add = findViewById(R.id.btnAddEntry);
+        FloatingActionButton back = findViewById(R.id.btnBack);
         imageButton = findViewById(R.id.imageButton);
         location = findViewById(R.id.location);
 
@@ -157,7 +154,7 @@ public class AddEntry extends AppCompatActivity {
                     intent.setType("image/*");
                     intent.setAction(Intent.ACTION_GET_CONTENT);
                     startActivityForResult(Intent.createChooser(intent, "Select Image"), Gallery_request_code);
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
             }

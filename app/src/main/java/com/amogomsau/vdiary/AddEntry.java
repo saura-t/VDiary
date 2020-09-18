@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -24,12 +25,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,6 +47,8 @@ public class AddEntry extends AppCompatActivity {
     private ImageView imageButton;
     private TextView location;
     private LocationManager locationManager;
+    private String personId;
+    private String strDate;
     double latitude;
     double longitude;
     private static final int REQUEST_LOCATION = 1;
@@ -60,18 +69,18 @@ public class AddEntry extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             imageButton.setImageBitmap(imageBitmap);
-        } else if(requestCode == Gallery_request_code && resultCode == RESULT_OK && data != null) {
+        } else if (requestCode == Gallery_request_code && resultCode == RESULT_OK && data != null) {
             Uri object = data.getData();
             imageButton.setImageURI(object);
         }
     }
 
-    private boolean isLocationEnabled(){
+    private boolean isLocationEnabled() {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
-    private void gps_dialog(){
+    private void gps_dialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Wait, Location Seems Off. Turn On To Find Post Related To Your Location.")
                 .setMessage("Please Select High Priority!")
@@ -133,8 +142,7 @@ public class AddEntry extends AppCompatActivity {
                         location.setText(addresses.get(0).getLocality());
                     }
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
             }
@@ -165,16 +173,35 @@ public class AddEntry extends AppCompatActivity {
                     return false;
                 }
             }
-            
+
 
         });
+
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null) {
+            personId = acct.getId();
+        }
+
+        Date date = Calendar.getInstance().getTime();
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        strDate = dateFormat.format(date);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatabaseHelper mango = new DatabaseHelper(AddEntry.this);
-                mango.addEntry(2, title.getText().toString().trim(), description.getText().toString().trim(), title.getText().toString().trim(), title.getText().toString().trim(), title.getText().toString().trim());
+                mango.addEntry(personId.trim(), strDate, title.getText().toString().trim(), description.getText().toString().trim(), ((BitmapDrawable) imageButton.getDrawable()).getBitmap().toString().trim(), location.getText().toString().trim());
                 finish();
+            }
+        });
+
+        add.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                DatabaseHelper mango = new DatabaseHelper(AddEntry.this);
+                mango.onDelete();
+                return false;
             }
         });
 

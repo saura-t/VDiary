@@ -25,18 +25,14 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class home extends AppCompatActivity {
 
-    ImageView imageView;
-    TextView name, email, id;
-    Button signOut;
-    GoogleSignInClient mGoogleSignInClient;
-    FloatingActionButton add_button;
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        add_button = findViewById(R.id.btnAddEntry);
+        FloatingActionButton add_button = findViewById(R.id.btnAddEntry);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,18 +51,17 @@ public class home extends AppCompatActivity {
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        imageView = findViewById(R.id.imageView);
-        name = findViewById(R.id.textName);
-        email = findViewById(R.id.textEmail);
-        id = findViewById(R.id.textID);
-        signOut = findViewById(R.id.btnSignOut);
+        ImageView avatarImage = findViewById(R.id.avatarImage);
+        TextView username = findViewById(R.id.usernameText);
+        TextView email = findViewById(R.id.emailText);
+        TextView googleId = findViewById(R.id.googleIdText);
+
+        Button signOut = findViewById(R.id.btnSignOut);
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.btnSignOut:
-                        signOut();
-                        break;
+                if (v.getId() == R.id.btnSignIn) {
+                    signOut();
                 }
             }
         });
@@ -75,13 +70,13 @@ public class home extends AppCompatActivity {
 
         if (acct != null) {
             String personName = acct.getDisplayName();
-            name.setText(personName);
+            username.setText(personName);
             String personEmail = acct.getEmail();
             email.setText(personEmail);
             String personId = acct.getId();
-            id.setText(personId);
+            googleId.setText(personId);
             Uri personPhoto = acct.getPhotoUrl();
-            Glide.with(this).load(String.valueOf(personPhoto)).into(imageView);
+            Glide.with(this).load(String.valueOf(personPhoto)).into(avatarImage);
         }
     }
 

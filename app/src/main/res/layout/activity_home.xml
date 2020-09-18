@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/textName"
+                    android:id="@+id/usernameText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/lblUsername"
@@ -32,19 +32,19 @@
                     android:textColor="@color/black">
                 </TextView>
                 <TextView
-                    android:id="@+id/textEmail"
+                    android:id="@+id/emailText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textName"
+                    android:layout_below="@id/usernameText"
                     android:hint="@string/lblEmail"
                     android:textSize="15sp"
                     android:textColor="@color/black">
                 </TextView>
                 <TextView
-                    android:id="@+id/textID"
+                    android:id="@+id/googleIdText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textEmail"
+                    android:layout_below="@id/emailText"
                     android:hint="@string/lblGoogleId"
                     android:textColor="@color/black">
                 </TextView>
@@ -56,10 +56,12 @@
                     android:layout_height="75dp"
                     app:cardCornerRadius="50dp">
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/avatarImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:srcCompat="@tools:sample/avatars">
+                        tools:srcCompat="@tools:sample/avatars"
+                        android:contentDescription="Users Photo"
+                        tools:ignore="HardcodedText">
                     </ImageView>
                 </androidx.cardview.widget.CardView>
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
@@ -69,7 +71,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sign Out"
-                android:layout_gravity="right|bottom"/>
+                android:layout_gravity="right|bottom"
+                tools:ignore="HardcodedText,RtlHardcoded" />
 
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
@@ -94,7 +97,8 @@
                 android:layout_rowWeight="1"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="6dp"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                tools:ignore="UnusedAttribute">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -105,14 +109,16 @@
                         android:layout_height="wrap_content"
                         android:text="Title"
                         android:textSize="35sp"
-                        android:textAppearance="?attr/textAppearanceHeadline6">
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        tools:ignore="HardcodedText">
                     </TextView>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Description"
                         android:textSize="20sp"
-                        android:textAppearance="?attr/textAppearanceBody2">
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        tools:ignore="HardcodedText">
                     </TextView>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -132,7 +138,8 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="32dp"
             android:src="@drawable/ic_plus_24"
-            android:backgroundTint="@color/colorPrimary">
+            android:backgroundTint="@color/colorPrimary"
+            tools:ignore="UnusedAttribute">
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

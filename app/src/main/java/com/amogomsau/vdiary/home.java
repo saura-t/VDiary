@@ -98,7 +98,7 @@ public class home extends AppCompatActivity {
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.getId() == R.id.btnSignIn) {
+                if (v.getId() == R.id.btnSignOut) {
                     signOut();
                 }
             }

@@ -29,6 +29,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -180,15 +181,21 @@ public class AddEntry extends AppCompatActivity {
             personId = acct.getId();
         }
 
-        Date date = Calendar.getInstance().getTime();
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-        strDate = dateFormat.format(date);
+        final String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatabaseHelper mango = new DatabaseHelper(AddEntry.this);
-                mango.addEntry(personId.trim(), strDate, title.getText().toString().trim(), description.getText().toString().trim(), ((BitmapDrawable) imageButton.getDrawable()).getBitmap().toString().trim(), location.getText().toString().trim());
+
+                Bitmap bitmap = ((BitmapDrawable) imageButton.getDrawable()).getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+                byte[] imageInByte = baos.toByteArray();
+
+                String imageByteInString = new String(imageInByte);
+
+                mango.addEntry(personId.trim(), date, title.getText().toString().trim(), description.getText().toString().trim(), imageByteInString, location.getText().toString().trim());
                 finish();
             }
         });

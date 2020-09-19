@@ -2,6 +2,7 @@ package com.amogomsau.vdiary;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -72,6 +73,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } else {
             Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    Cursor readAllData(){
+        String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
     }
 
 }

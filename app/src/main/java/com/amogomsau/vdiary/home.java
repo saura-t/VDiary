@@ -2,8 +2,11 @@ package com.amogomsau.vdiary;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -21,14 +24,51 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class home extends AppCompatActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
+    RecyclerView recyclerView;
+    DatabaseHelper myDB;
+    ArrayList<String> entry_id, entry_title, entry_date, entry_location;
+    CustomAdaptor customAdaptor;
+
+    void storeDataInArrays(){
+        Cursor cursor = myDB.readAllData();
+        if(cursor.getCount() == 0){
+            //empty_imageview.setVisibility(View.VISIBLE);
+            //no_data.setVisibility(View.VISIBLE);
+        }else{
+            while (cursor.moveToNext()){
+                entry_id.add(cursor.getString(0));
+                entry_title.add(cursor.getString(3));
+                entry_date.add(cursor.getString(2));
+                entry_location.add(cursor.getString(6));
+            }
+            //empty_imageview.setVisibility(View.GONE);
+            //no_data.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        recyclerView = findViewById(R.id.recyclerView);
+
+        myDB = new DatabaseHelper(home.this);
+        entry_id = new ArrayList<>();
+        entry_title = new ArrayList<>();
+        entry_date = new ArrayList<>();
+        entry_location = new ArrayList<>();
+
+        storeDataInArrays();
+
+        customAdaptor = new CustomAdaptor(home.this, entry_id, entry_title, entry_date, entry_location);
+        recyclerView.setAdapter(customAdaptor);
+        recyclerView.setLayoutManager(new LinearLayoutManager(home.this));
 
         FloatingActionButton add_button = findViewById(R.id.btnAddEntry);
         add_button.setOnClickListener(new View.OnClickListener() {

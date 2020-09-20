@@ -41,14 +41,6 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"/>
 
-                <TextView
-                    android:id="@+id/googleIdText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/emailText"
-                    android:hint="@string/lblGoogleId"
-                    android:textColor="@color/black"/>
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="75dp"
                     android:layout_height="75dp"
@@ -65,13 +57,6 @@
                         tools:srcCompat="@tools:sample/avatars"/>
                 </androidx.cardview.widget.CardView>
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
-
-            <Button
-                android:id="@+id/btnSignOut"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|bottom"
-                android:text="Sign Out" />
 
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 

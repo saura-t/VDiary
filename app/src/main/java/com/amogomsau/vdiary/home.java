@@ -1,6 +1,7 @@
 package com.amogomsau.vdiary;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,6 +22,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,6 +36,46 @@ public class home extends AppCompatActivity {
     DatabaseHelper myDB;
     ArrayList<String> entry_title, entry_description, entry_location, entry_date, entry_image;
     CustomAdaptor customAdaptor;
+    private int RC_SIGN_IN = 0;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            completedTask.getResult(ApiException.class);
+            // Signed in successfully, show authenticated UI.
+            Intent intent = new Intent(home.this, home.class);
+            startActivity(intent);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("Error", "signInResult:failed code=" + e.getStatusCode());
+            updateUI();
+        }
+    }
+
+    private void updateUI() {
+        Toast.makeText(home.this, "You were signed in!", Toast.LENGTH_LONG).show();
+        // Signed in successfully, show authenticated UI.
+        Intent intent = new Intent(home.this, home.class);
+        startActivity(intent);
+    }
 
     void storeDataInArrays(){
         Cursor cursor = myDB.readAllData();
@@ -74,6 +117,18 @@ public class home extends AppCompatActivity {
         entry_date = new ArrayList<>();
         entry_image = new ArrayList<>();
 
+        ImageView avatar = findViewById(R.id.avatarImage);
+
+        avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOut();
+                if (view.getId() == R.id.avatarImage){
+                    signIn();
+                }
+            }
+        });
+
         storeDataInArrays();
 
         customAdaptor = new CustomAdaptor(home.this, entry_title, entry_description, entry_location, entry_date, entry_image);
@@ -102,17 +157,6 @@ public class home extends AppCompatActivity {
         ImageView avatarImage = findViewById(R.id.avatarImage);
         TextView username = findViewById(R.id.usernameText);
         TextView email = findViewById(R.id.emailText);
-        TextView googleId = findViewById(R.id.googleIdText);
-
-        Button signOut = findViewById(R.id.btnSignOut);
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v.getId() == R.id.btnSignOut) {
-                    signOut();
-                }
-            }
-        });
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
 
@@ -122,9 +166,11 @@ public class home extends AppCompatActivity {
             String personEmail = acct.getEmail();
             email.setText(personEmail);
             String personId = acct.getId();
-            googleId.setText(personId);
             Uri personPhoto = acct.getPhotoUrl();
             Glide.with(this).load(String.valueOf(personPhoto)).into(avatarImage);
+        }
+        else {
+            finish();
         }
     }
 
@@ -134,7 +180,6 @@ public class home extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(home.this, "Signed Out!", Toast.LENGTH_LONG).show();
-                        finish();
                     }
                 });
     }

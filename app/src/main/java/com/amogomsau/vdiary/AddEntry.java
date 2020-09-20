@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -188,12 +189,13 @@ public class AddEntry extends AppCompatActivity {
             public void onClick(View view) {
                 DatabaseHelper mango = new DatabaseHelper(AddEntry.this);
 
-//                Bitmap bitmap = ((BitmapDrawable) imageButton.getDrawable()).getBitmap();
-//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
-//                byte[] imageInByte = baos.toByteArray();
+                Bitmap bitmap = ((BitmapDrawable) imageButton.getDrawable()).getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
+                byte[] imageInByte = baos.toByteArray();
+                String encodedImage = Base64.encodeToString(imageInByte, Base64.DEFAULT);
 
-                mango.addEntry(personId.trim(), date, title.getText().toString().trim(), description.getText().toString().trim(), "image", location.getText().toString().trim());
+                mango.addEntry(personId.trim(), date, title.getText().toString().trim(), description.getText().toString().trim(), encodedImage, location.getText().toString().trim());
                 finish();
             }
         });

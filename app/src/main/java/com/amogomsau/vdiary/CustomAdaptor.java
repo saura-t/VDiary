@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,10 +45,9 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHold
         holder.entry_location.setText(String.valueOf(entry_location.get(position)));
         holder.entry_date.setText(String.valueOf(entry_date.get(position)));
 
-//        String mango = String.valueOf(entry_image.get(position));
-//        byte[] byteArr = mango.getBytes();
-//        Bitmap bmp = BitmapFactory.decodeByteArray(byteArr, 0, byteArr.length);
-//        holder.entry_image.setImageBitmap(bmp);
+        byte[] decodedString = Base64.decode(String.valueOf(entry_image.get(position)), Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        holder.entry_image.setImageBitmap(decodedByte);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHold
             entry_description = itemView.findViewById(R.id.entry_description_txt);
             entry_location = itemView.findViewById(R.id.entry_location_txt);
             entry_date = itemView.findViewById(R.id.entry_date_txt);
-//            entry_image = itemView.findViewById(R.id.entry_image_view);
+            entry_image = itemView.findViewById(R.id.entry_image_view);
         }
     }
 }

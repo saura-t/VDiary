@@ -37,7 +37,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:orientation="vertical"
                     android:layout_alignParentRight="true">
+
+                <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -54,6 +63,19 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:layout_alignParentEnd="true" />
+
+                </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+                    <TextView
+                        android:id="@+id/entry_date_txt"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="date"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        />
                 </com.google.android.material.circularreveal.CircularRevealLinearLayout>
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
@@ -75,26 +97,17 @@
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="24sp"
                     android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/entry_date_txt"
+                <ImageView
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
+                    android:id="@+id/entry_image_view"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="date"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textSize="20sp"
-                    android:layout_alignParentEnd="true"
-                    android:textColor="@color/black"/>
+                    android:layout_height="100dp"
+                    android:src="@drawable/addimageprompt"/>
+
 
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
-            <ImageView
-                android:id="@+id/entry_image_view"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:src="@drawable/ic_location_24"/>
+
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

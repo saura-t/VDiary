@@ -1,9 +1,13 @@
 package com.amogomsau.vdiary;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,14 +18,15 @@ import java.util.ArrayList;
 public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHolder> {
 
     private Context context;
-    private ArrayList entry_title, entry_description, entry_location, entry_date;
+    private ArrayList entry_title, entry_description, entry_location, entry_date, entry_image;
 
-    CustomAdaptor(Context context, ArrayList entry_title, ArrayList entry_description, ArrayList entry_location, ArrayList entry_date) {
+    CustomAdaptor(Context context, ArrayList entry_title, ArrayList entry_description, ArrayList entry_location, ArrayList entry_date, ArrayList entry_image) {
         this.context = context;
         this.entry_title = entry_title;
         this.entry_description = entry_description;
         this.entry_location = entry_location;
         this.entry_date = entry_date;
+        this.entry_image = entry_image;
     }
 
     @NonNull
@@ -38,6 +43,11 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHold
         holder.entry_description.setText(String.valueOf(entry_description.get(position)));
         holder.entry_location.setText(String.valueOf(entry_location.get(position)));
         holder.entry_date.setText(String.valueOf(entry_date.get(position)));
+
+//        String mango = String.valueOf(entry_image.get(position));
+//        byte[] byteArr = mango.getBytes();
+//        Bitmap bmp = BitmapFactory.decodeByteArray(byteArr, 0, byteArr.length);
+//        holder.entry_image.setImageBitmap(bmp);
     }
 
     @Override
@@ -48,6 +58,7 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView entry_title, entry_description, entry_location, entry_date;
+        ImageView entry_image;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +66,7 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHold
             entry_description = itemView.findViewById(R.id.entry_description_txt);
             entry_location = itemView.findViewById(R.id.entry_location_txt);
             entry_date = itemView.findViewById(R.id.entry_date_txt);
+//            entry_image = itemView.findViewById(R.id.entry_image_view);
         }
     }
 }

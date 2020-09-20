@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.sql.Blob;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;

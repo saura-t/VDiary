@@ -188,14 +188,12 @@ public class AddEntry extends AppCompatActivity {
             public void onClick(View view) {
                 DatabaseHelper mango = new DatabaseHelper(AddEntry.this);
 
-                Bitmap bitmap = ((BitmapDrawable) imageButton.getDrawable()).getBitmap();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                byte[] imageInByte = baos.toByteArray();
+//                Bitmap bitmap = ((BitmapDrawable) imageButton.getDrawable()).getBitmap();
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
+//                byte[] imageInByte = baos.toByteArray();
 
-                String imageByteInString = new String(imageInByte);
-
-                mango.addEntry(personId.trim(), date, title.getText().toString().trim(), description.getText().toString().trim(), imageByteInString, location.getText().toString().trim());
+                mango.addEntry(personId.trim(), date, title.getText().toString().trim(), description.getText().toString().trim(), "image", location.getText().toString().trim());
                 finish();
             }
         });

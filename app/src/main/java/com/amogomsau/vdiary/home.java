@@ -31,7 +31,7 @@ public class home extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     RecyclerView recyclerView;
     DatabaseHelper myDB;
-    ArrayList<String> entry_title, entry_description, entry_location, entry_date;
+    ArrayList<String> entry_title, entry_description, entry_location, entry_date, entry_image;
     CustomAdaptor customAdaptor;
 
     void storeDataInArrays(){
@@ -43,6 +43,7 @@ public class home extends AppCompatActivity {
             while (cursor.moveToNext()){
                 entry_title.add(cursor.getString(3));
                 entry_description.add(cursor.getString(4));
+                entry_image.add(cursor.getString(5));
                 entry_location.add(cursor.getString(6));
                 entry_date.add(cursor.getString(2));
             }
@@ -71,10 +72,11 @@ public class home extends AppCompatActivity {
         entry_description = new ArrayList<>();
         entry_location = new ArrayList<>();
         entry_date = new ArrayList<>();
+        entry_image = new ArrayList<>();
 
         storeDataInArrays();
 
-        customAdaptor = new CustomAdaptor(home.this, entry_title, entry_description, entry_location, entry_date);
+        customAdaptor = new CustomAdaptor(home.this, entry_title, entry_description, entry_location, entry_date, entry_image);
         recyclerView.setAdapter(customAdaptor);
         recyclerView.setLayoutManager(new LinearLayoutManager(home.this));
 

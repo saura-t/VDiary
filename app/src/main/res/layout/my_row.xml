@@ -85,6 +85,11 @@
 
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
+            <ImageView
+                android:id="@+id/entry_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_location_24"/>
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

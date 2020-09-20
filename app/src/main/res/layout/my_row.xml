@@ -9,7 +9,6 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
         android:layout_margin="10dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="6dp">
@@ -30,8 +29,7 @@
                     android:layout_height="wrap_content"
                     android:text="Title"
                     android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textSize="34sp"
-                    android:textColor="@color/black"/>
+                    android:textSize="34sp"/>
 
                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
                     android:layout_width="wrap_content"
@@ -60,7 +58,6 @@
                         android:layout_height="wrap_content"
                         android:text="location"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="@color/black"
                         android:textSize="20sp"
                         android:layout_alignParentEnd="true" />
 
@@ -73,9 +70,7 @@
                         android:layout_height="wrap_content"
                         android:text="date"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"
-                        />
+                        android:textSize="20sp"/>
                 </com.google.android.material.circularreveal.CircularRevealLinearLayout>
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
@@ -95,8 +90,7 @@
                     android:layout_height="wrap_content"
                     android:text="Description"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textSize="24sp"
-                    android:textColor="@color/black"/>
+                    android:textSize="24sp"/>
                 <ImageView
                     android:layout_alignParentRight="true"
                     android:id="@+id/entry_image_view"
@@ -106,8 +100,6 @@
 
 
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
-
-
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

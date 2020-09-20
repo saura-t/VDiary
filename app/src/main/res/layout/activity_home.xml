@@ -29,7 +29,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/lblUsername"
-                    android:textColor="@color/black"
                     android:textSize="35sp"/>
 
                 <TextView
@@ -38,7 +37,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/usernameText"
                     android:hint="@string/lblEmail"
-                    android:textColor="@color/black"
                     android:textSize="15sp"/>
 
                 <androidx.cardview.widget.CardView

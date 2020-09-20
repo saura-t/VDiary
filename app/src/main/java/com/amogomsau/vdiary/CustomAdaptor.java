@@ -14,13 +14,14 @@ import java.util.ArrayList;
 public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHolder> {
 
     private Context context;
-    private ArrayList entry_title, entry_description, entry_location;
+    private ArrayList entry_title, entry_description, entry_location, entry_date;
 
-    CustomAdaptor(Context context, ArrayList entry_title, ArrayList entry_description, ArrayList entry_location) {
+    CustomAdaptor(Context context, ArrayList entry_title, ArrayList entry_description, ArrayList entry_location, ArrayList entry_date) {
         this.context = context;
         this.entry_title = entry_title;
         this.entry_description = entry_description;
         this.entry_location = entry_location;
+        this.entry_date = entry_date;
     }
 
     @NonNull
@@ -36,6 +37,7 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHold
         holder.entry_title.setText(String.valueOf(entry_title.get(position)));
         holder.entry_description.setText(String.valueOf(entry_description.get(position)));
         holder.entry_location.setText(String.valueOf(entry_location.get(position)));
+        holder.entry_date.setText(String.valueOf(entry_date.get(position)));
     }
 
     @Override
@@ -45,13 +47,14 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView entry_title, entry_description, entry_location;
+        TextView entry_title, entry_description, entry_location, entry_date;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             entry_title = itemView.findViewById(R.id.entry_title_txt);
             entry_description = itemView.findViewById(R.id.entry_description_txt);
             entry_location = itemView.findViewById(R.id.entry_location_txt);
+            entry_date = itemView.findViewById(R.id.entry_date_txt);
         }
     }
 }

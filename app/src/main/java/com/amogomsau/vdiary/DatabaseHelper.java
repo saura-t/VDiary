@@ -9,9 +9,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
+    private String personId;
     private static final String DATABASE_NAME = "Diary.db";
     private static final int DATABASE_VERSION = 1;
 

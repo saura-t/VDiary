@@ -73,7 +73,8 @@
                     android:layout_height="wrap_content"
                     android:text="Description"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/entry_date_txt"
@@ -84,7 +85,8 @@
                     android:text="date"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="20sp"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/black"/>
 
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
